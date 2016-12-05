@@ -20,4 +20,11 @@ std::string DateTime::getFormatted() const
 	oss << std::setw(2) << minute;
 	return oss.str();
 }
-3
+DateTime::DateTime()
+{
+}
+
+
+DateTime::~DateTime()
+{
+}

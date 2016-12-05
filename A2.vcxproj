@@ -85,6 +85,7 @@
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Task.cpp" />
     <ClCompile Include="TimeAllocation.cpp" />
+    <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="WorkDone.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -94,7 +95,13 @@
     <ClInclude Include="Project.h" />
     <ClInclude Include="Task.h" />
     <ClInclude Include="TimeAllocation.h" />
+    <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="WorkDone.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Data.xml">
+      <SubType>Designer</SubType>
+    </Xml>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
