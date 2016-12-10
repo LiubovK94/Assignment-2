@@ -2,7 +2,7 @@
 #include "DateTime.h"
 class TimeAllocation
 {
-private:
+protected:
 	DateTime start;
 	DateTime end;
 

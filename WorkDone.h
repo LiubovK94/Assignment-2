@@ -6,9 +6,11 @@
 class WorkDone : public TimeAllocation
 {
 private:
-	std::string note;
+	std::string description;
+	std::string type = "Work Done";
 public:
 	void showDetails();
+	WorkDone(char const * start_, char const * end_, char const * desc_);
 	WorkDone();
 	~WorkDone();
 };

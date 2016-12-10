@@ -1,5 +1,5 @@
 <list>
- 
+
   <project>
     <name>C++ Boot Camp Assignment</name>
     <description>An application which helps manage projects and their sub-tasks.</description>
@@ -10,37 +10,37 @@
       <taskDescription>Write all classes</taskDescription>
       <taskStart>31/10/2016 19:15</taskStart>
       <taskDeadline>02/11/2016 16:00</taskDeadline>
-      <timealloc>
-         <workDone>
-          <wdStart>31/10/2016 19:15</wdStart>
-           <wdEnd>31/10/2016 19:30</wdEnd>
-          <wdDescription>Added &lt;&lt; operator to DateTime class</wdDescription>
-        </workDone>
+     <!--  <timealloc>
+          <type>Work Done</type>
+          <tstart>31/10/2016 19:15</tstart>
+          <tend>31/10/2016 19:30</tend>
+          <tdescription>Added operator to DateTime class</tdescription>
+        </timealloc>
 
-        <workDone>
-          <wdStart>31/10/2016 20:00</wdStart>
-          <wdEnd>31/10/2016 20:30</wdEnd>
-          <wdDescription>Added cascading &lt;&lt; for all classes</wdDescription>
-        </workDone>
+        <timealloc>
+          <type>Work Done</type>
+          <start>31/10/2016 20:00</start>
+          <end>31/10/2016 20:30</end>
+          <description>Added cascading &lt;&lt; for all classes</description>
+        </timealloc> -->
 
-        <meeting>
-          <mStart>01/11/2016 07:45</mStart>
-          <mEnd>01/11/2016 09:00</mEnd>
-          <mDescription>Meeting in 9309</mDescription>
+        <timealloc>
+          <type>Meeting</type>
+          <tstart>01/11/2016 07:45</tstart>
+          <tend>01/11/2016 09:00</tend>
+          <tdescription>Meeting in 9309</tdescription>
           <attendee>Jamie Hufford</attendee>
           <attendee>Pascale Vacher</attendee>
-        </meeting>
+        </timealloc>
 
-        <bugFix>
-          <bfStart>02/11/2016 15:15</bfStart>
-          <bfEnd>02/11/2016 15:30</bfEnd>
+        <timealloc>
+          <type>Bug Fix</type>
+          <tstart>02/11/2016 15:15</tstart>
+          <tend>02/11/2016 15:30</tend>
           <id>152</id>
-          <bfDescription>Fixed formatting issues</bfDescription>
-        </bugFix>
-      </timealloc>
-
-    </task>
-
+          <tdescription>Fixed formatting issues</tdescription>
+        </timealloc>
+        </task>
 
     <task>
       <taskName>Test Classes</taskName>
@@ -51,5 +51,9 @@
   </project>
   <project>
     <name>Project 2</name>
+    <description>22222 An application which helps manage projects and their sub-tasks.</description>
+    <start>00/00/0000 19:00</start>
+    <deadline>00/00/0000 16:00</deadline>
   </project>
+
 </list>
