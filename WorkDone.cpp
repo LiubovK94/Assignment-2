@@ -13,8 +13,7 @@ WorkDone::WorkDone(char const * start_, char const * end_, char const * desc_)
 
 void WorkDone::showDetails()
 {
-	std::cout << type << std::endl;
-	std::cout << description << std::endl;
+	std::cout << "     " << start.getFormatted() << " - " << end.getFormatted() << ": " << description << std::endl;
 }
 
 WorkDone::WorkDone()

@@ -16,8 +16,30 @@ void Project::addTask(Task * t)
 
 void Project::show()
 {
-	std::cout << name << std::endl;
-	std::cout << description << std::endl;
+	for (int i = 0; i <= name.length() ; ++i)
+	{
+		if (i <= name.length() -1){
+			std::cout << "=";
+		}
+		else {
+			std::cout << "=" << std::endl;
+		}
+	}
+
+	std::cout<< " " << name << std::endl;
+	for (int i = 0; i <= name.length(); ++i)
+	{
+		if (i <= name.length() - 1){
+			std::cout << "-";
+		}
+		else {
+			std::cout << "-" << std::endl;
+		}
+	}
+	std::cout <<" - "<< description << std::endl;
+	std::cout <<" - Started: " << start.getFormatted() << std::endl;
+	std::cout <<" - Deadline: " << deadline.getFormatted() << std::endl;
+
 	for (auto it = tasks.begin(); it != tasks.end(); ++it)
 	{
 		(*it)->showTasks();

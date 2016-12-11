@@ -11,9 +11,8 @@ BugFix::BugFix(char const * start_, char const * end_, char const * desc_, char 
 
 void BugFix::showDetails()
 {
-	std::cout << type << std::endl;
-	std::cout << note << std::endl;
-	std::cout << id << std::endl;
+	std::cout << "     " << start.getFormatted() << " - " << end.getFormatted() << ": ";
+	std::cout << "Bug #" << id << " - " << note << std::endl;
 }
 BugFix::BugFix()
 {

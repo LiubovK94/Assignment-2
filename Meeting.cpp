@@ -12,13 +12,21 @@ Meeting::Meeting(char const * start_, char const * end_, char const * desc_)
 
 void Meeting::showDetails()
 {
-	std::cout << type << std::endl;
-	std::cout << location << std::endl;
-	for (auto i = attendees.begin(); i < attendees.end(); ++i){
-		std::cout << (*i) << std::endl;
+	std::cout << "     " << start.getFormatted() << " - " << end.getFormatted() << ": ";
+	std::cout << location << " - ";
+	for (auto i = attendees.begin(); i < attendees.end(); ++i)
+	{
+		if (i < attendees.end() - 1)
+		{
+			std::cout << (*i) << ", ";
+		}
+		else
+		{
+			std::cout << (*i) << std::endl;
+		}
+
 	}
-    std::cout << start.getFormatted() << std::endl;
-	std::cout << end.getFormatted() << std::endl;
+
 }
 
 void Meeting::addAttendee(char const * a)

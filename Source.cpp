@@ -1,5 +1,6 @@
 #include <iostream>
 #include <sstream>
+#include <fstream>
 #include <string>
 #include "DateTime.h"
 #include "BugFix.h"
@@ -11,19 +12,37 @@
 #include "tinyxml2.h"
 
 #ifndef XMLCheckResult
-#define XMLCheckResult(a_eResult) if (a_eResult != tinyxml2::XML_SUCCESS) { printf("Error: %i\n", a_eResult); return a_eResult; }
+#define XMLCheckResult(a_eResult) if (a_eResult != tinyxml2::XML_SUCCESS) { std::cout<<"This file does not exist!"<<std::endl; std::cout<<"Press any key"<<std::endl; std::cin.get(); }
 #endif
 
-void createObjects(std::vector <Project *>); 
+void createObjects(tinyxml2::XMLDocument &, std::vector <Project *> &);
 
-int main()
+int main(/*int argc, char **argv*/)
 {
 	tinyxml2::XMLDocument xmlDoc;
-	tinyxml2::XMLError eResult = xmlDoc.LoadFile("Dat.xml");
+	tinyxml2::XMLError eResult = xmlDoc.LoadFile("Data.xml");
 	XMLCheckResult(eResult);
-	tinyxml2::XMLNode * pRoot = xmlDoc.FirstChild();
-	if (pRoot == nullptr) return tinyxml2::XML_ERROR_FILE_READ_ERROR;
-	
+	/*tinyxml2::XMLError eResult = xmlDoc.LoadFile(argv[1]);
+	XMLCheckResult(eResult);*/
+    std::vector<Project *> projects;
+    createObjects(xmlDoc, projects);
+
+
+
+	for (auto it = projects.begin(); it != projects.end(); ++it)
+	{
+		(*it)->show();
+	}
+
+
+
+
+	std::cin.get();
+
+}
+
+void createObjects(tinyxml2::XMLDocument &xmlDoc, std::vector <Project *> &projects)
+{
 	tinyxml2::XMLElement * pNameProj;
 	tinyxml2::XMLElement * pDescProj;
 	tinyxml2::XMLElement * pStartProj;
@@ -41,158 +60,139 @@ int main()
 	tinyxml2::XMLElement * pTAId;
 	tinyxml2::XMLElement * pTAAttendee;
 
+	tinyxml2::XMLNode * pRoot = xmlDoc.FirstChild();
 
-	std::vector<Project *> projects;
+	if (pRoot != nullptr) {
+		tinyxml2::XMLElement * pElement = pRoot->FirstChildElement("project");
 
+		while (pElement != nullptr)
+		{
+			pNameProj = pElement->FirstChildElement("name");
+			if (pNameProj == nullptr) { const char* projName = "Name of the project does not exist"; }
+			const char* projName = pNameProj->GetText();
 
-	tinyxml2::XMLElement * pElement = pRoot->FirstChildElement("project");
+			pDescProj = pElement->FirstChildElement("description");
+			if (pDescProj == nullptr) { const char* projDesc = "Description of the project does not exist"; }
+			const char* projDesc = pDescProj->GetText();
 
-	while (pElement != nullptr)
-	{
-		pNameProj = pElement->FirstChildElement("name");
-		if (pNameProj == nullptr) { const char* projName = "Name of the project does not exist"; }
-		const char* projName = pNameProj->GetText();
+			pStartProj = pElement->FirstChildElement("start");
+			if (pStartProj == nullptr)  { const char* projStart = "Start date of the project does not exist"; }
+			const char* projStart = pStartProj->GetText();
 
-		pDescProj = pElement->FirstChildElement("description");
-		if (pDescProj == nullptr) { const char* projDesc = "Description of the project does not exist"; }
-		const char* projDesc = pDescProj->GetText();
+			pDeadlineProj = pElement->FirstChildElement("deadline");
+			if (pDeadlineProj == nullptr) { const char* projDeadline = "Deadline of the project does not exist"; }
+			const char* projDeadline = pDeadlineProj->GetText();
 
-		pStartProj = pElement->FirstChildElement("start");
-		if (pStartProj == nullptr)  { const char* projStart = "Start date of the project does not exist"; }
-		const char* projStart = pStartProj->GetText();
+			Project * pr = new Project(projName, projDesc, projStart, projDeadline);
+			projects.push_back(pr);
 
-		pDeadlineProj = pElement->FirstChildElement("deadline");
-		if (pDeadlineProj == nullptr) { const char* projDeadline = "Deadline of the project does not exist"; }
-		const char* projDeadline = pDeadlineProj->GetText();
+			pTask = pElement->FirstChildElement("task");
+			while (pTask != nullptr){
+				pTaskName = pTask->FirstChildElement("taskName");
+				if (pTaskName == nullptr) { const char* taskName = "Name of the task does not exist"; }
+				const char* taskName = pTaskName->GetText();
 
-		Project * pr = new Project(projName, projDesc, projStart, projDeadline);
-		projects.push_back(pr);
+				pTaskDesc = pTask->FirstChildElement("taskDescription");
+				if (pTaskDesc == nullptr) { const char* taskDesc = "Desc of the task does not exist"; }
+				const char* taskDesc = pTaskDesc->GetText();
 
-		pTask = pElement->FirstChildElement("task");
-		while (pTask != nullptr){
-			pTaskName = pTask->FirstChildElement("taskName");
-			if (pTaskName == nullptr) { const char* taskName = "Name of the task does not exist"; }
-			const char* taskName = pTaskName->GetText();
+				pTaskStart = pTask->FirstChildElement("taskStart");
+				if (pTaskStart == nullptr) { const char* taskStart = "Start of the task does not exist"; }
+				const char* taskStart = pTaskStart->GetText();
 
-			pTaskDesc = pTask->FirstChildElement("taskDescription");
-			if (pTaskDesc == nullptr) { const char* taskDesc = "Desc of the task does not exist"; }
-			const char* taskDesc = pTaskDesc->GetText();
+				pTaskDeadline = pTask->FirstChildElement("taskDeadline");
+				if (pTaskDeadline == nullptr) { const char* taskEnd = "End of the task does not exist"; }
+				const char* taskEnd = pTaskDeadline->GetText();
 
-			pTaskStart = pTask->FirstChildElement("taskStart");
-			if (pTaskStart == nullptr) { const char* taskStart = "Start of the task does not exist"; }
-			const char* taskStart = pTaskStart->GetText();
+				Task * tsk = new Task(taskName, taskDesc, taskStart, taskEnd);
+				pr->addTask(tsk);
 
-			pTaskDeadline = pTask->FirstChildElement("taskDeadline");
-			if (pTaskDeadline == nullptr) { const char* taskEnd = "End of the task does not exist"; }
-			const char* taskEnd = pTaskDeadline->GetText();
+				pTimeAlloc = pTask->FirstChildElement("timealloc");
 
-			Task * tsk = new Task(taskName, taskDesc, taskStart, taskEnd);
-			pr->addTask(tsk);
+				while (pTimeAlloc != nullptr){
 
-			pTimeAlloc = pTask->FirstChildElement("timealloc");
+					pType = pTimeAlloc->FirstChildElement("type");
 
-			while(pTimeAlloc != nullptr){
+					if (pType == nullptr) { const char* type = "no type specified"; }
+					const char* type = pType->GetText();
 
-				pType = pTimeAlloc->FirstChildElement("type");
-
-				if (pType == nullptr) { const char* type = "no type specified"; }
-				const char* type = pType->GetText();
-
-				if (type == (std::string("Work Done")))
-				{
-
-					pTAStart = pTimeAlloc->FirstChildElement("tstart");
-					if (pTAStart == nullptr) { const char* taStart = "no taStrat"; }
-					const char* taStart = pTAStart->GetText();
-
-
-					pTAEnd = pTimeAlloc->FirstChildElement("tend");
-					if (pTAEnd == nullptr) { const char* taEnd = "no taend"; }
-					const char* taEnd = pTAEnd->GetText();
-
-					pTADescription = pTimeAlloc->FirstChildElement("tdescription");
-					if (pTADescription == nullptr) { const char* taDesc = "no tadescription"; }
-					const char* taDesc = pTADescription->GetText();
-
-					tsk->addTA(std::move(std::unique_ptr<TimeAllocation>(new WorkDone(taStart, taEnd, taDesc))));
-				}
-
-				else if (type == (std::string("Bug Fix")))
-				{
-					pTAStart = pTimeAlloc->FirstChildElement("tstart");
-					if (pTAStart == nullptr) { const char* taStart = "no taStrat"; }
-					const char* taStart = pTAStart->GetText();
-
-
-					pTAEnd = pTimeAlloc->FirstChildElement("tend");
-					if (pTAEnd == nullptr) { const char* taEnd = "no taend"; }
-					const char* taEnd = pTAEnd->GetText();
-
-					pTADescription = pTimeAlloc->FirstChildElement("tdescription");
-					if (pTADescription == nullptr) { const char* taDesc = "no tadescription"; }
-					const char* taDesc = pTADescription->GetText();
-
-					pTAId = pTimeAlloc->FirstChildElement("id");
-					if (pTAId == nullptr) { const char* taId = "no id"; }
-					const char* taId = pTAId->GetText();
-
-					tsk->addTA(std::move(std::unique_ptr<TimeAllocation>(new BugFix(taStart, taEnd, taDesc, taId))));
-				}
-
-				else if (type == (std::string("Meeting")))
-				{
-					pTAStart = pTimeAlloc->FirstChildElement("tstart");
-					if (pTAStart == nullptr) { const char* taStart = "no taStrat"; }
-					const char* taStart = pTAStart->GetText();
-
-
-					pTAEnd = pTimeAlloc->FirstChildElement("tend");
-					if (pTAEnd == nullptr) { const char* taEnd = "no taend"; }
-					const char* taEnd = pTAEnd->GetText();
-
-					pTADescription = pTimeAlloc->FirstChildElement("tdescription");
-					if (pTADescription == nullptr) { const char* taDesc = "no tadescription"; }
-					const char* taDesc = pTADescription->GetText();
-
-					std::unique_ptr<Meeting> m(new Meeting(taStart, taEnd, taDesc));
-
-					pTAAttendee = pTimeAlloc->FirstChildElement("attendee");
-					while (pTAAttendee != nullptr)
+					if (type == (std::string("Work Done")))
 					{
-						const char* taAt = pTAAttendee->GetText();
-						m->addAttendee(taAt);
-						pTAAttendee = pTAAttendee->NextSiblingElement("attendee");
+
+						pTAStart = pTimeAlloc->FirstChildElement("tstart");
+						if (pTAStart == nullptr) { const char* taStart = "no taStrat"; }
+						const char* taStart = pTAStart->GetText();
+
+
+						pTAEnd = pTimeAlloc->FirstChildElement("tend");
+						if (pTAEnd == nullptr) { const char* taEnd = "no taend"; }
+						const char* taEnd = pTAEnd->GetText();
+
+						pTADescription = pTimeAlloc->FirstChildElement("tdescription");
+						if (pTADescription == nullptr) { const char* taDesc = "no tadescription"; }
+						const char* taDesc = pTADescription->GetText();
+
+						tsk->addTA(std::move(std::unique_ptr<TimeAllocation>(new WorkDone(taStart, taEnd, taDesc))));
 					}
 
-					tsk->addTA(std::move(m));
+					else if (type == (std::string("Bug Fix")))
+					{
+						pTAStart = pTimeAlloc->FirstChildElement("tstart");
+						if (pTAStart == nullptr) { const char* taStart = "no taStrat"; }
+						const char* taStart = pTAStart->GetText();
+
+
+						pTAEnd = pTimeAlloc->FirstChildElement("tend");
+						if (pTAEnd == nullptr) { const char* taEnd = "no taend"; }
+						const char* taEnd = pTAEnd->GetText();
+
+						pTADescription = pTimeAlloc->FirstChildElement("tdescription");
+						if (pTADescription == nullptr) { const char* taDesc = "no tadescription"; }
+						const char* taDesc = pTADescription->GetText();
+
+						pTAId = pTimeAlloc->FirstChildElement("id");
+						if (pTAId == nullptr) { const char* taId = "no id"; }
+						const char* taId = pTAId->GetText();
+
+						tsk->addTA(std::move(std::unique_ptr<TimeAllocation>(new BugFix(taStart, taEnd, taDesc, taId))));
+					}
+
+					else if (type == (std::string("Meeting")))
+					{
+						pTAStart = pTimeAlloc->FirstChildElement("tstart");
+						if (pTAStart == nullptr) { const char* taStart = "no taStrat"; }
+						const char* taStart = pTAStart->GetText();
+
+
+						pTAEnd = pTimeAlloc->FirstChildElement("tend");
+						if (pTAEnd == nullptr) { const char* taEnd = "no taend"; }
+						const char* taEnd = pTAEnd->GetText();
+
+						pTADescription = pTimeAlloc->FirstChildElement("tdescription");
+						if (pTADescription == nullptr) { const char* taDesc = "no tadescription"; }
+						const char* taDesc = pTADescription->GetText();
+
+						std::unique_ptr<Meeting> m(new Meeting(taStart, taEnd, taDesc));
+
+						pTAAttendee = pTimeAlloc->FirstChildElement("attendee");
+						while (pTAAttendee != nullptr)
+						{
+							const char* taAt = pTAAttendee->GetText();
+							m->addAttendee(taAt);
+							pTAAttendee = pTAAttendee->NextSiblingElement("attendee");
+						}
+
+						tsk->addTA(std::move(m));
+					}
+					pTimeAlloc = pTimeAlloc->NextSiblingElement("timealloc");
 				}
-				pTimeAlloc = pTimeAlloc->NextSiblingElement("timealloc");
+
+				pTask = pTask->NextSiblingElement("task");
 			}
 
-			pTask = pTask->NextSiblingElement("task");
+
+			pElement = pElement->NextSiblingElement("project");
+
 		}
-
-
-	 pElement = pElement->NextSiblingElement("project");
-
 	}
-
-
-
-	for (auto it = projects.begin(); it != projects.end(); ++it)
-	{
-		(*it)->show();
-	}
-
-
-
-
-	std::cin.get();
-
-}
-
-void createObjects(std::vector <Project *> v)
-{
-
-
 }
