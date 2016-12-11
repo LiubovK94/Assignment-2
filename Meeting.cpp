@@ -14,7 +14,9 @@ void Meeting::showDetails()
 {
 	std::cout << type << std::endl;
 	std::cout << location << std::endl;
-	std::cout << attendees[0] << std::endl;
+	for (auto i = attendees.begin(); i < attendees.end(); ++i){
+		std::cout << (*i) << std::endl;
+	}
     std::cout << start.getFormatted() << std::endl;
 	std::cout << end.getFormatted() << std::endl;
 }

@@ -10,7 +10,7 @@
       <taskDescription>Write all classes</taskDescription>
       <taskStart>31/10/2016 19:15</taskStart>
       <taskDeadline>02/11/2016 16:00</taskDeadline>
-     <!--  <timealloc>
+   <timealloc>
           <type>Work Done</type>
           <tstart>31/10/2016 19:15</tstart>
           <tend>31/10/2016 19:30</tend>
@@ -19,10 +19,10 @@
 
         <timealloc>
           <type>Work Done</type>
-          <start>31/10/2016 20:00</start>
-          <end>31/10/2016 20:30</end>
-          <description>Added cascading &lt;&lt; for all classes</description>
-        </timealloc> -->
+          <tstart>31/10/2016 20:00</tstart>
+          <tend>31/10/2016 20:30</tend>
+          <tdescription>Added cascading &lt;&lt; for all classes</tdescription>
+        </timealloc> 
 
         <timealloc>
           <type>Meeting</type>
@@ -31,7 +31,7 @@
           <tdescription>Meeting in 9309</tdescription>
           <attendee>Jamie Hufford</attendee>
           <attendee>Pascale Vacher</attendee>
-        </timealloc>
+        </timealloc> 
 
         <timealloc>
           <type>Bug Fix</type>
@@ -39,7 +39,7 @@
           <tend>02/11/2016 15:30</tend>
           <id>152</id>
           <tdescription>Fixed formatting issues</tdescription>
-        </timealloc>
+        </timealloc> 
         </task>
 
     <task>
