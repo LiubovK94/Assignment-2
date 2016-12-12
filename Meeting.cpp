@@ -1,5 +1,5 @@
 #include "Meeting.h"
-#include <iostream>
+
 
 
 Meeting::Meeting(std::string &start_, std::string &end_, std::string &desc_)
@@ -10,19 +10,13 @@ Meeting::Meeting(std::string &start_, std::string &end_, std::string &desc_)
 
 }
 
-const int Meeting::getStartMins(){ return start.getMins(); }
-
-const int Meeting::getStartHours(){ return start.getHours(); }
-
-
-const int Meeting::getEndMins(){ return end.getMins(); }
-
-const int Meeting::getEndHours(){ return end.getHours(); }
+const int Meeting::getStartMins(){ return start.getFullMin(); }
+const int Meeting::getEndMins(){ return end.getFullMin(); }
 
 const std::stringstream Meeting::showDetails()
 {
 
-	std::stringstream ss; 
+	std::stringstream ss;
 
 	ss << "     " << start.getFormatted() << " - " << end.getFormatted() << ": ";
 	ss << location << " - ";
@@ -38,7 +32,7 @@ const std::stringstream Meeting::showDetails()
 		}
 
 	}
-	ss  << std::endl;
+	ss << std::endl;
 	return ss;
 }
 

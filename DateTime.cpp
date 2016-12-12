@@ -20,13 +20,20 @@ std::string DateTime::getFormatted() const
 	oss << std::setw(2) << minute;
 	return oss.str();
 }
+
+const int DateTime::getFullMin() //returns hour & min in minutes only
+{
+	int m = 0;
+	m = hour * 60 + minute;
+	return m;
+}
 const int DateTime::getHours(){ return hour; }
 const int DateTime::getMins(){ return minute; }
 const int DateTime::getDay(){ return day; }
 const int DateTime::getMonth(){ return month; }
 const int DateTime::getYear(){ return year; }
 
-const long DateTime::getYMin()
+long DateTime::getYMin() const //converting provided date into minutes only
 {
 	long min = 0;
 	switch (month)
@@ -47,6 +54,8 @@ const long DateTime::getYMin()
 	}
 	return min;
 }
+
+
 DateTime::DateTime()
 {
 }

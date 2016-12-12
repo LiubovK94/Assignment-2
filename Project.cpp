@@ -9,12 +9,12 @@ Project::Project(std::string &name_, std::string &description_, std::string &sta
 	deadline = DateTime(deadline_);
 }
 
-void Project::addTask(Task * t)
+void Project::addTask(Task * t) //add new task to the vector
 {
 	tasks.push_back(t);
 }
 
-const std::stringstream Project::show()
+const std::stringstream Project::show() //output formatted project info
 {
 	std::stringstream ss;
 	for (int i = 0; i <= name.length(); ++i)
@@ -51,14 +51,14 @@ const std::stringstream Project::show()
 
 
 
-const std::string Project::countTime()
+const std::string Project::countTime() //count time spent on a project
 {
 	int min = 0;
 	int hours = 0;
 	for (auto it : tasks)
 	{
 		int m = (*it).countM();
-		int h  = (*it).countH();
+		int h = (*it).countH();
 
 		min = min + (h * 60) + m;
 
@@ -70,12 +70,11 @@ const std::string Project::countTime()
 
 }
 
-const std::string Project::getStart(){ return start.getFormatted(); }
-const std::string Project::getDeadline(){ return deadline.getFormatted(); }
 
 
 
-const void Project::loadAsc()
+
+const void Project::loadAsc() // load Time Allocations in ascending order
 {
 
 	for (int i = 0; i <= name.length(); ++i)
@@ -111,7 +110,7 @@ const void Project::loadAsc()
 
 }
 
-const void Project::loadDesc()
+const void Project::loadDesc() // load Time Allocations in descending order
 {
 
 	for (int i = 0; i <= name.length(); ++i)

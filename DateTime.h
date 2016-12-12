@@ -14,7 +14,9 @@ public:
 	const int getDay();
 	const int getMonth();
 	const int getYear();
-	const long getYMin();
+	const int getFullMin();
+	long getYMin() const;
+
 	DateTime();
 	~DateTime();
 private:
@@ -24,4 +26,3 @@ private:
 	int month; // 1 to 12
 	int year;
 };
-

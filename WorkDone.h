@@ -2,6 +2,7 @@
 #include <string>
 #include "DateTime.h"
 #include "TimeAllocation.h"
+#include <iostream>
 
 class WorkDone : public TimeAllocation
 {
@@ -13,13 +14,11 @@ public:
 	WorkDone(std::string &start_, std::string &end_, std::string &desc_);
 	const std::string getStart();
 	const std::string getEnd();
-	const std::string getDesc();
+
 	const int getStartMins();
-	const int getStartHours();
 	const int getEndMins();
-	const int getEndHours();
 	WorkDone();
 	~WorkDone();
 };
 
-const std::ostream& operator << (std::ostream& os,WorkDone& w);
+const std::ostream& operator << (std::ostream& os, WorkDone& w);

@@ -1,6 +1,5 @@
 #include "WorkDone.h"
-#include "TimeAllocation.h"
-#include <iostream>
+
 
 WorkDone::WorkDone(std::string &start_, std::string &end_, std::string &desc_)
 {
@@ -10,14 +9,8 @@ WorkDone::WorkDone(std::string &start_, std::string &end_, std::string &desc_)
 
 }
 
-const int WorkDone::getStartMins(){ return start.getMins(); }
-
-const int WorkDone::getStartHours(){ return start.getHours(); }
-
-
-const int WorkDone::getEndMins(){ return end.getMins(); }
-
-const int WorkDone::getEndHours(){ return end.getHours(); }
+const int WorkDone::getStartMins(){ return start.getFullMin(); }
+const int WorkDone::getEndMins(){ return end.getFullMin(); }
 
 const std::stringstream WorkDone::showDetails()
 {
@@ -36,7 +29,7 @@ WorkDone::~WorkDone()
 }
 const std::string WorkDone::getStart(){ return start.getFormatted(); }
 const std::string WorkDone::getEnd(){ return end.getFormatted(); }
-const std::string WorkDone::getDesc(){ return description; }
+
 
 
 const std::ostream& operator << (std::ostream& os, WorkDone& w)

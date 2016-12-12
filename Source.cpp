@@ -23,13 +23,14 @@ void loadNewFile(std::vector<Project *>&);
 void loadAsc(std::vector<Project *> &);
 void loadDesc(std::vector<Project *> &);
 
-int main(/*int argc, char **argv*/)
+int main(/*int argc, char **argv*/) //command line input
 {
 	tinyxml2::XMLDocument xmlDoc;
 	tinyxml2::XMLError eResult = xmlDoc.LoadFile("Data.xml");
 	XMLCheckResult(eResult);
-	//tinyxml2::XMLError eResult = xmlDoc.LoadFile(argv[1]);
+	//tinyxml2::XMLError eResult = xmlDoc.LoadFile(argv[1]); //command line input
 	//XMLCheckResult(eResult);
+
 	std::vector<Project *> projects;
 	createObjects(xmlDoc, projects);
 
@@ -46,7 +47,7 @@ int main(/*int argc, char **argv*/)
 
 }
 
-void createObjects(tinyxml2::XMLDocument &xmlDoc, std::vector <Project *> &projects)
+void createObjects(tinyxml2::XMLDocument &xmlDoc, std::vector <Project *> &projects) //load data from xml file
 {
 
 	tinyxml2::XMLElement * pNameProj;
@@ -237,7 +238,7 @@ void createObjects(tinyxml2::XMLDocument &xmlDoc, std::vector <Project *> &proje
 	}
 }
 
-void menu(std::vector<Project *> &p)
+void menu(std::vector<Project *> &p) // function for loading menu
 {
 	char opt; 
 
@@ -261,7 +262,7 @@ void menu(std::vector<Project *> &p)
 
 }
 
-void loadNewFile(std::vector<Project *> &p)
+void loadNewFile(std::vector<Project *> &p) //load file at runtime
 {
 	p.clear();
 
@@ -288,7 +289,7 @@ void loadNewFile(std::vector<Project *> &p)
 
 }
 
-void loadAsc(std::vector<Project *> &p)
+void loadAsc(std::vector<Project *> &p) // load file with time allocations in ascending order
 {
 	for (auto it : p)
 	{
@@ -297,7 +298,7 @@ void loadAsc(std::vector<Project *> &p)
 
 	menu(p);
 }
-void loadDesc(std::vector<Project *> &p)
+void loadDesc(std::vector<Project *> &p) // load file with time allocations in descending order
 {
 	for (auto it : p)
 	{

@@ -2,6 +2,7 @@
 #include <string>
 #include "TimeAllocation.h"
 #include <vector>
+#include <iostream>
 
 class Extra : public TimeAllocation
 {
@@ -18,9 +19,7 @@ public:
 
 	const std::vector<std::string> getProg();
 	const int getStartMins();
-	const int getStartHours();
 	const int getEndMins();
-	const int getEndHours();
 	Extra(std::string &start_, std::string &end_, std::string &desc_);
 	Extra();
 	~Extra();

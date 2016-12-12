@@ -16,14 +16,11 @@ private:
 public:
 
 	Project(std::string &name_, std::string &description_, std::string &start_, std::string &deadline_);
-	const std::string getStart();
-	const std::string getDeadline();
-
 	
+
 	const void loadAsc();
 	const void loadDesc();
 	void addTask(Task * t);
-	
 	const std::stringstream show();
 	const std::string countTime();
 	Project();

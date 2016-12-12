@@ -1,7 +1,5 @@
 #include "Task.h"
-#include "WorkDone.h"
-#include <iostream>
-#include <algorithm>
+
 
 Task::Task(std::string &name_, std::string &description_, std::string &start_, std::string &deadline_)
 {
@@ -11,7 +9,7 @@ Task::Task(std::string &name_, std::string &description_, std::string &start_, s
 	deadline = DateTime(deadline_);
 }
 
-const std::stringstream Task::showTasks()
+const std::stringstream Task::showTasks() //out put formatted task
 {
 	std::stringstream ss;
 
@@ -48,7 +46,7 @@ const std::stringstream Task::showTasks()
 	}
 	return ss;
 }
-const std::string Task::countTime()
+const std::string Task::countTime() //count time spent on the task
 {
 	int hours = countH();
 	int min = countM();
@@ -56,18 +54,17 @@ const std::string Task::countTime()
 	return s;
 
 }
-const int Task::countH()
+const int Task::countH() //count hours spent on the task
 {
 	int min = 0;
 	int hours = 0;
 	for (auto& it : ta)
 	{
-		int sh = (*it).getStartHours();
+
 		int sm = (*it).getStartMins();
-		int eh = (*it).getEndHours();
 		int em = (*it).getEndMins();
 
-		min = min + ((eh * 60 + em) - (sh * 60 + sm));
+		min = min + (em - sm);
 	}
 
 	hours = min / 60;
@@ -75,18 +72,16 @@ const int Task::countH()
 	return hours;
 
 }
-const int Task::countM()
+const int Task::countM() //count minutes spent on the task
 {
 	int min = 0;
 	int hours = 0;
 	for (auto& it : ta)
 	{
-		int sh = (*it).getStartHours();
 		int sm = (*it).getStartMins();
-		int eh = (*it).getEndHours();
 		int em = (*it).getEndMins();
 
-		min = min + ((eh * 60 + em) - (sh * 60 + sm));
+		min = min + (em - sm);
 	}
 
 	min = min % 60;
@@ -95,22 +90,10 @@ const int Task::countM()
 
 }
 
-const std::string Task::getStart(){ return start.getFormatted(); }
-const std::string Task::getDeadline(){ return deadline.getFormatted(); }
 
 
 
-static bool cmp(std::unique_ptr<TimeAllocation> &a, std::unique_ptr<TimeAllocation> &b)
-{
-	return (a->getYMins() < b->getYMins());
-}  
-
-static bool cmp_d(std::unique_ptr<TimeAllocation> &a, std::unique_ptr<TimeAllocation> &b)
-{
-	return (a->getYMins() > b->getYMins());
-}
-
-const void Task::loadAsc()
+const void Task::loadAsc() //load Time Aloocations in ascending order
 {
 	for (int i = 0; i <= name.length(); ++i)
 	{
@@ -135,7 +118,7 @@ const void Task::loadAsc()
 	std::cout << "  - Started: " << start.getFormatted() << std::endl;
 	std::cout << "  - Deadline: " << deadline.getFormatted() << std::endl;
 
-	sort(ta.begin(), ta.end(), cmp);
+	sort(ta.begin(), ta.end(), [](std::unique_ptr<TimeAllocation> &a, std::unique_ptr<TimeAllocation> &b){return a < b; }); //sort vector of Time Allocations
 
 	if (ta.empty()){ std::cout << "  - No time allocations are recorded for this task" << std::endl; }
 	else{
@@ -147,8 +130,8 @@ const void Task::loadAsc()
 		}
 	}
 
-} 
-const void Task::loadDesc()
+}
+const void Task::loadDesc() //load Time Aloocations in descending order
 {
 	for (int i = 0; i <= name.length(); ++i)
 	{
@@ -173,7 +156,7 @@ const void Task::loadDesc()
 	std::cout << "  - Started: " << start.getFormatted() << std::endl;
 	std::cout << "  - Deadline: " << deadline.getFormatted() << std::endl;
 
-	sort(ta.begin(), ta.end(), cmp_d);
+	sort(ta.begin(), ta.end(), [](std::unique_ptr<TimeAllocation> &a, std::unique_ptr<TimeAllocation> &b){return a > b; }); //sort vector of Time Allocations
 
 	if (ta.empty()){ std::cout << "  - No time allocations are recorded for this task" << std::endl; }
 	else{
@@ -189,7 +172,7 @@ const void Task::loadDesc()
 
 
 
-void Task::addTA(std::unique_ptr<TimeAllocation> ta_)
+void Task::addTA(std::unique_ptr<TimeAllocation> ta_) //put new Time allocation into vector
 {
 	ta.emplace_back(std::move(ta_));
 
