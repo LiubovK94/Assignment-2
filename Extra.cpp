@@ -26,9 +26,25 @@ const int Extra::getEndMins(){ return end.getMins(); }
 
 const int Extra::getEndHours(){ return end.getHours(); }
 
-const void Extra::showDetails()
+const std::stringstream Extra::showDetails()
 {
+	std::stringstream ss;
+	ss << "     " << start.getFormatted() << " - " << end.getFormatted() << ": ";
+	ss << description << " - ";
+	for (auto i = programmer.begin(); i <programmer.end(); ++i)
+	{
+		if (i < programmer.end() - 1)
+		{
+			ss << (*i) << ", ";
+		}
+		else
+		{
+			ss << (*i);
+		}
 
+	}
+	ss << std::endl;
+	return ss;
 }
 
 Extra::Extra()
@@ -42,21 +58,6 @@ Extra::~Extra()
 
 const std::ostream& operator << (std::ostream& os, Extra& e)
 {
-	std::vector<std::string> programmer = e.getProg();
-	os << "     " << e.getStart() << " - " << e.getEnd() << ": ";
-	os << e.getDesc() << " - ";
-	for (auto i = programmer.begin(); i <programmer.end(); ++i)
-	{
-		if (i < programmer.end() - 1)
-		{
-			os << (*i) << ", ";
-		}
-		else
-		{
-			os << (*i);
-		}
-
-	}
-	os << std::endl;
+	os << e.showDetails().rdbuf();
 	return os;
 }

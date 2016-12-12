@@ -10,7 +10,7 @@ private:
 	std::vector<std::string> programmer;
 	std::string type = "Extra Feature";
 public:
-	const void showDetails();
+	const std::stringstream showDetails();
 	void addProgrammer(std::string &a);
 	const std::string getStart();
 	const std::string getEnd();

@@ -8,7 +8,7 @@ private:
 	std::string note;
 	std::string type = "Bug Fix";
 public:
-	const void showDetails();
+	const std::stringstream showDetails();
 	const std::string getStart();
 	const std::string getEnd();
 	const std::string getNote();

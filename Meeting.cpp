@@ -19,24 +19,27 @@ const int Meeting::getEndMins(){ return end.getMins(); }
 
 const int Meeting::getEndHours(){ return end.getHours(); }
 
-const void Meeting::showDetails()
+const std::stringstream Meeting::showDetails()
 {
-	std::cout << "     " << start.getFormatted() << " - " << end.getFormatted() << ": ";
-	std::cout << location << " - ";
+
+	std::stringstream ss; 
+
+	ss << "     " << start.getFormatted() << " - " << end.getFormatted() << ": ";
+	ss << location << " - ";
 	for (auto i = attendees.begin(); i < attendees.end(); ++i)
 	{
 		if (i < attendees.end() - 1)
 		{
-			std::cout << (*i) << ", ";
+			ss << (*i) << ", ";
 		}
 		else
 		{
-			std::cout << (*i);
+			ss << (*i);
 		}
 
 	}
-	std::cout  << std::endl;
-
+	ss  << std::endl;
+	return ss;
 }
 
 void Meeting::addAttendee(std::string &a)
@@ -47,8 +50,6 @@ void Meeting::addAttendee(std::string &a)
 const std::string Meeting::getStart(){ return start.getFormatted(); }
 const std::string Meeting::getEnd(){ return end.getFormatted(); }
 const std::string Meeting::getLoc(){ return location; }
-const std::vector<std::string> Meeting::getAtt() { return attendees; }
-
 
 
 Meeting::Meeting()
@@ -62,21 +63,7 @@ Meeting::~Meeting()
 
 const std::ostream& operator << (std::ostream& os, Meeting& m)
 {
-	std::vector<std::string> attendees = m.getAtt();
-	os << "     " << m.getStart() << " - " << m.getEnd() << ": ";
-	os << m.getLoc() << " - ";
-	for (auto i = attendees.begin(); i < attendees.end(); ++i)
-	{
-		if (i < attendees.end() - 1)
-		{
-			os << (*i) << ", ";
-		}
-		else
-		{
-			os << (*i);
-		}
 
-	}
-	os << std::endl;
+	os << m.showDetails().rdbuf();
 	return os;
 }

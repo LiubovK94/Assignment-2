@@ -23,13 +23,13 @@ void loadNewFile(std::vector<Project *>&);
 void loadAsc(std::vector<Project *> &);
 void loadDesc(std::vector<Project *> &);
 
-int main(int argc, char **argv)
+int main(/*int argc, char **argv*/)
 {
 	tinyxml2::XMLDocument xmlDoc;
-	//tinyxml2::XMLError eResult = xmlDoc.LoadFile("Data.xml");
-	//XMLCheckResult(eResult);
-	tinyxml2::XMLError eResult = xmlDoc.LoadFile(argv[1]);
+	tinyxml2::XMLError eResult = xmlDoc.LoadFile("Data.xml");
 	XMLCheckResult(eResult);
+	//tinyxml2::XMLError eResult = xmlDoc.LoadFile(argv[1]);
+	//XMLCheckResult(eResult);
 	std::vector<Project *> projects;
 	createObjects(xmlDoc, projects);
 

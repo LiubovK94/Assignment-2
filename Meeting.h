@@ -11,7 +11,7 @@ private:
 	std::string type = "Meeting";
 
 public:
-	const void showDetails();
+	const std::stringstream showDetails();
 	void addAttendee(std::string &a);
 	const std::string getStart();
 	const std::string getEnd();

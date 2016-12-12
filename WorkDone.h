@@ -9,7 +9,7 @@ private:
 	std::string description;
 	std::string type = "Work Done";
 public:
-	const void showDetails();
+	const std::stringstream showDetails();
 	WorkDone(std::string &start_, std::string &end_, std::string &desc_);
 	const std::string getStart();
 	const std::string getEnd();

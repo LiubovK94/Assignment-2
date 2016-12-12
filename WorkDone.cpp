@@ -19,9 +19,11 @@ const int WorkDone::getEndMins(){ return end.getMins(); }
 
 const int WorkDone::getEndHours(){ return end.getHours(); }
 
-const void WorkDone::showDetails()
+const std::stringstream WorkDone::showDetails()
 {
-	std::cout << "     " << start.getFormatted() << " - " << end.getFormatted() << ": " << description << std::endl;
+	std::stringstream ss;
+	ss << "     " << start.getFormatted() << " - " << end.getFormatted() << ": " << description << std::endl;
+	return ss;
 }
 
 WorkDone::WorkDone()
@@ -39,6 +41,6 @@ const std::string WorkDone::getDesc(){ return description; }
 
 const std::ostream& operator << (std::ostream& os, WorkDone& w)
 {
-	os << "     " << w.getStart() << " - " << w.getEnd() << ": " << w.getDesc() << std::endl;
+	os << w.showDetails().rdbuf();
 	return os;
 }

@@ -8,14 +8,14 @@ protected:
 	DateTime end;
 
 public:
-	virtual const void showDetails() = 0;
-	virtual const std::string getStart();
-	virtual const std::string getEnd();
-	virtual const int getStartMins();
-	virtual const int getStartHours();
-	virtual const int getEndMins();
-	virtual const int getEndHours();
-	virtual const long getYMins();
+	 virtual const std::stringstream showDetails() = 0;
+	 const std::string getStart();
+	 const std::string getEnd();
+	 const int getStartMins();
+	 const int getStartHours();
+	 const int getEndMins();
+	 const int getEndHours();
+	 const long getYMins();
 	
 	TimeAllocation();
 	~TimeAllocation();

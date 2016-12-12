@@ -11,40 +11,42 @@ Task::Task(std::string &name_, std::string &description_, std::string &start_, s
 	deadline = DateTime(deadline_);
 }
 
-void Task::showTasks()
+const std::stringstream Task::showTasks()
 {
+	std::stringstream ss;
+
 	for (int i = 0; i <= name.length(); ++i)
 	{
 		if (i <= name.length() - 1){
-			std::cout << "-";
+			ss << "-";
 		}
 		else {
-			std::cout << "-" << std::endl;
+			ss << "-" << std::endl;
 		}
 	}
-	std::cout << " " << name << std::endl;
+	ss << " " << name << "     " << countTime() << std::endl;
 	for (int i = 0; i <= name.length(); ++i)
 	{
 		if (i <= name.length() - 1){
-			std::cout << "-";
+			ss << "-";
 		}
 		else {
-			std::cout << "-" << std::endl;
+			ss << "-" << std::endl;
 		}
 	}
-	std::cout << "  - " << description << std::endl;
-	std::cout << "  - Started: " << start.getFormatted() << std::endl;
-	std::cout << "  - Deadline: " << deadline.getFormatted() << std::endl;
-	if (ta.empty()){ std::cout << "  - No time allocations are recorded for this task" << std::endl; }
+	ss << "  - " << description << std::endl;
+	ss << "  - Started: " << start.getFormatted() << std::endl;
+	ss << "  - Deadline: " << deadline.getFormatted() << std::endl;
+	if (ta.empty()){ ss << "  - No time allocations are recorded for this task" << std::endl; }
 	else{
-		std::cout << "  - Time Allocations:" << std::endl;
+		ss << "  - Time Allocations:" << std::endl;
 
 		for (auto& it : ta)
 		{
-			std::cout << *it;
+			ss << *it;
 		}
 	}
-
+	return ss;
 }
 const std::string Task::countTime()
 {
@@ -95,8 +97,7 @@ const int Task::countM()
 
 const std::string Task::getStart(){ return start.getFormatted(); }
 const std::string Task::getDeadline(){ return deadline.getFormatted(); }
-const std::string Task::getName(){ return name; }
-const std::string Task::getDescription(){ return description; }
+
 
 
 static bool cmp(std::unique_ptr<TimeAllocation> &a, std::unique_ptr<TimeAllocation> &b)
@@ -186,20 +187,7 @@ const void Task::loadDesc()
 
 }
 
-const std::stringstream Task::showTimeAl()
-{
-	std::stringstream ss;
-	if (ta.empty()){ ss << "  - No time allocations are recorded for this task" << std::endl; }
-	else{
-		ss << "  - Time Allocations:" << std::endl;
 
-		for (auto& it : ta)
-		{
-			ss << *it;
-		}
-	}
-	return ss;
-}
 
 void Task::addTA(std::unique_ptr<TimeAllocation> ta_)
 {
@@ -218,30 +206,6 @@ Task::~Task()
 
 const std::ostream& operator << (std::ostream& os, Task& t)
 {
-	std::string name = t.getName();
-
-	for (int i = 0; i <= name.length(); ++i)
-	{
-		if (i <= name.length() - 1){
-			os << "-";
-		}
-		else {
-			os << "-" << std::endl;
-		}
-	}
-	os << " " << name << "     " << t.countTime() << std::endl;
-	for (int i = 0; i <= name.length(); ++i)
-	{
-		if (i <= name.length() - 1){
-			os << "-";
-		}
-		else {
-			os << "-" << std::endl;
-		}
-	}
-	os << "  - " << t.getDescription() << std::endl;
-	os << "  - Started: " << t.getStart() << std::endl;
-	os << "  - Deadline: " << t.getDeadline() << std::endl;
-	os << t.showTimeAl().rdbuf();
+	os << t.showTasks().rdbuf();
 	return os;
 }

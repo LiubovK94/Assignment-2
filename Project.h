@@ -18,14 +18,13 @@ public:
 	Project(std::string &name_, std::string &description_, std::string &start_, std::string &deadline_);
 	const std::string getStart();
 	const std::string getDeadline();
-	const std::string getName();
-	const std::string getDescription();
-	const std::vector<Task *>& getTasks();
+
+	
 	const void loadAsc();
 	const void loadDesc();
 	void addTask(Task * t);
-	const void viewTasks();
-	const void show();
+	
+	const std::stringstream show();
 	const std::string countTime();
 	Project();
 	~Project();

@@ -15,11 +15,10 @@ class Task
 	
 public:
 	Task(std::string &name_, std::string &description_, std::string &start_, std::string &deadline_);
-	void showTasks();
+	const std::stringstream showTasks();
 	
 	void addTA(std::unique_ptr<TimeAllocation> ta_);
 	
-	const std::stringstream Task::showTimeAl();
 	Task();
 	~Task();
 	const std::string countTime();
@@ -27,8 +26,6 @@ public:
 	const int Task::countH();
 	const std::string getStart();
 	const std::string getDeadline();
-	const std::string getName();
-	const std::string getDescription();
 	const void loadAsc();
 	const void loadDesc();
 	std::unique_ptr<TimeAllocation> getTA();

@@ -18,10 +18,12 @@ const int BugFix::getEndMins(){ return end.getMins(); }
 const int BugFix::getEndHours(){ return end.getHours(); }
 
 
-const void BugFix::showDetails()
+const std::stringstream BugFix::showDetails()
 {
-	std::cout << "     " << start.getFormatted() << " - " << end.getFormatted() << ": ";
-	std::cout << "Bug #" << id << " - " << note << std::endl;
+	std::stringstream ss;
+	ss << "     " << start.getFormatted() << " - " << end.getFormatted() << ": ";
+	ss << "Bug #" << id << " - " << note << std::endl;
+	return ss;
 }
 BugFix::BugFix()
 {
@@ -39,7 +41,6 @@ const std::string BugFix::getId(){ return id; }
 
 const std::ostream& operator << (std::ostream& os, BugFix& b)
 {
-	os << "     " << b.getStart() << " - " << b.getEnd() << ": ";
-	os << "Bug #" << b.getId() << " - " << b.getNote() << std::endl;
+	os << b.showDetails().rdbuf();
 	return os;
 }
