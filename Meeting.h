@@ -18,7 +18,10 @@ public:
 	const std::string getLoc();
 	
 	const std::vector<std::string> getAtt();
-
+	const int getStartMins();
+	const int getStartHours();
+	const int getEndMins();
+	const int getEndHours();
 	Meeting(std::string &start_, std::string &end_, std::string &desc_);
 	Meeting();
 	~Meeting();

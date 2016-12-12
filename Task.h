@@ -22,10 +22,14 @@ public:
 	const std::stringstream Task::showTimeAl();
 	Task();
 	~Task();
+	const std::string countTime();
+	const int Task::countM();
+	const int Task::countH();
 	const std::string getStart();
 	const std::string getDeadline();
 	const std::string getName();
 	const std::string getDescription();
+
 	std::unique_ptr<TimeAllocation> getTA();
 };
 

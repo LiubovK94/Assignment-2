@@ -21,7 +21,7 @@ void Task::showTasks()
 			std::cout << "-" << std::endl;
 		}
 	}
-	std::cout <<" "<< name << std::endl;
+	std::cout << " " << name << std::endl;
 	for (int i = 0; i <= name.length(); ++i)
 	{
 		if (i <= name.length() - 1){
@@ -31,10 +31,10 @@ void Task::showTasks()
 			std::cout << "-" << std::endl;
 		}
 	}
-	std::cout <<"  - "<< description << std::endl;
+	std::cout << "  - " << description << std::endl;
 	std::cout << "  - Started: " << start.getFormatted() << std::endl;
 	std::cout << "  - Deadline: " << deadline.getFormatted() << std::endl;
-	if (ta.empty()){ std::cout << "  - No time allocations are recorded for this task" << std::endl;}
+	if (ta.empty()){ std::cout << "  - No time allocations are recorded for this task" << std::endl; }
 	else{
 		std::cout << "  - Time Allocations:" << std::endl;
 
@@ -43,6 +43,52 @@ void Task::showTasks()
 			std::cout << *it;
 		}
 	}
+
+}
+const std::string Task::countTime()
+{
+	int hours = countH();
+	int min = countM();
+	std::string s = "Time Spent:  " + std::to_string(hours) + "h " + std::to_string(min) + "m " ;
+	return s;
+
+}
+const int Task::countH()
+{
+	int min = 0;
+	int hours = 0;
+	for (auto& it : ta)
+	{
+		int sh = (*it).getStartHours();
+		int sm = (*it).getStartMins();
+		int eh = (*it).getEndHours();
+		int em = (*it).getEndMins();
+
+		min = min + ((eh * 60 + em) - (sh * 60 + sm));
+	}
+
+	hours = min / 60;
+	
+	return hours;
+
+}
+const int Task::countM()
+{
+	int min = 0;
+	int hours = 0;
+	for (auto& it : ta)
+	{
+		int sh = (*it).getStartHours();
+		int sm = (*it).getStartMins();
+		int eh = (*it).getEndHours();
+		int em = (*it).getEndMins();
+
+		min = min + ((eh * 60 + em) - (sh * 60 + sm));
+	}
+
+	min = min % 60;
+
+	return min;
 
 }
 
@@ -95,7 +141,7 @@ const std::ostream& operator << (std::ostream& os, Task& t)
 			os << "-" << std::endl;
 		}
 	}
-	os << " " << name << std::endl;
+	os << " " << name << "     " << t.countTime() << std::endl;
 	for (int i = 0; i <= name.length(); ++i)
 	{
 		if (i <= name.length() - 1){

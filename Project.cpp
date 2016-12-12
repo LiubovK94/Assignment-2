@@ -14,7 +14,7 @@ void Project::addTask(Task * t)
 	tasks.push_back(t);
 }
 
-void Project::show()
+const void Project::show()
 {
 	for (int i = 0; i <= name.length(); ++i)
 	{
@@ -47,13 +47,32 @@ void Project::show()
 	}
 }
 
-void Project::viewTasks()
+const void Project::viewTasks()
 {
 	for (auto it = tasks.begin(); it != tasks.end(); ++it)
 	{
 		(*it)->showTasks();
 
 	}
+}
+
+const std::string Project::countTime()
+{
+	int min = 0;
+	int hours = 0;
+	for (auto it : tasks)
+	{
+		int m = (*it).countM();
+		int h  = (*it).countH();
+
+		min = min + (h * 60) + m;
+
+	}
+	hours = min / 60;
+	min = min % 60;
+	std::string s = "Time Spent: " + std::to_string(hours) + "h " + std::to_string(min) + "m ";
+	return s;
+
 }
 
 const std::string Project::getStart(){ return start.getFormatted(); }
@@ -85,7 +104,7 @@ const std::ostream& operator << (std::ostream& os, Project& p)
 		}
 	}
 
-	os << " " << name << std::endl;
+	os << " " << name << "     " << p.countTime() << std::endl;
 	for (int i = 0; i <= name.length(); ++i)
 	{
 		if (i <= name.length() - 1){

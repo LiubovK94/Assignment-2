@@ -10,6 +10,15 @@ Meeting::Meeting(std::string &start_, std::string &end_, std::string &desc_)
 
 }
 
+const int Meeting::getStartMins(){ return start.getMins(); }
+
+const int Meeting::getStartHours(){ return start.getHours(); }
+
+
+const int Meeting::getEndMins(){ return end.getMins(); }
+
+const int Meeting::getEndHours(){ return end.getHours(); }
+
 const void Meeting::showDetails()
 {
 	std::cout << "     " << start.getFormatted() << " - " << end.getFormatted() << ": ";

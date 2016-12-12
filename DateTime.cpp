@@ -20,6 +20,9 @@ std::string DateTime::getFormatted() const
 	oss << std::setw(2) << minute;
 	return oss.str();
 }
+const int DateTime::getHours(){ return hour; }
+const int DateTime::getMins(){ return minute; }
+
 DateTime::DateTime()
 {
 }

@@ -14,7 +14,10 @@ public:
 	const std::string getStart();
 	const std::string getEnd();
 	const std::string getDesc();
-	
+	const int getStartMins();
+	const int getStartHours();
+	const int getEndMins();
+	const int getEndHours();
 	WorkDone();
 	~WorkDone();
 };

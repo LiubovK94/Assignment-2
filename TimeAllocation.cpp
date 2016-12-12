@@ -9,7 +9,10 @@ const void TimeAllocation::showDetails()
 }
 const std::string TimeAllocation::getStart(){ return start.getFormatted(); }
 const std::string TimeAllocation::getEnd(){ return end.getFormatted(); }
-
+const int TimeAllocation::getStartMins(){ return start.getMins(); }
+const int TimeAllocation::getStartHours(){ return start.getHours(); }
+const int TimeAllocation::getEndMins(){ return end.getMins(); }
+const int TimeAllocation::getEndHours(){ return end.getHours(); }
 TimeAllocation::TimeAllocation()
 {
 }

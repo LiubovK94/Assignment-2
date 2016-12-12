@@ -22,8 +22,9 @@ public:
 	const std::string getDescription();
 	const std::vector<Task *>& getTasks();
 	void addTask(Task * t);
-	void viewTasks();
-	void show();
+	const void viewTasks();
+	const void show();
+	const std::string countTime();
 	Project();
 	~Project();
 };

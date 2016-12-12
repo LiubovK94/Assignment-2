@@ -9,6 +9,8 @@ class DateTime
 public:
 	DateTime(std::string); // parse from a string format
 	std::string getFormatted() const; // return as a formatted string
+	const int getHours();
+	const int getMins();
 	DateTime();
 	~DateTime();
 private:

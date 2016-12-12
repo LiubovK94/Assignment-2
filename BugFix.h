@@ -13,6 +13,11 @@ public:
 	const std::string getEnd();
 	const std::string getNote();
 	const std::string getId();
+	const int getStartMins();
+	const int getStartHours();
+	const int getEndMins();
+	const int getEndHours();
+
 	BugFix(std::string &start_, std::string &end_, std::string &desc_, std::string &id_);
 	BugFix();
 	~BugFix();

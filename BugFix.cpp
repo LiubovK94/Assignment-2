@@ -8,6 +8,15 @@ BugFix::BugFix(std::string &start_, std::string &end_, std::string &desc_, std::
 	id = id_;
 
 }
+const int BugFix::getStartMins(){ return start.getMins(); }
+
+const int BugFix::getStartHours(){ return start.getHours(); }
+
+
+const int BugFix::getEndMins(){ return end.getMins(); }
+
+const int BugFix::getEndHours(){ return end.getHours(); }
+
 
 const void BugFix::showDetails()
 {

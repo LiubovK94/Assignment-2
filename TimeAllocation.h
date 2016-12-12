@@ -11,6 +11,10 @@ public:
 	virtual const void showDetails() = 0;
 	virtual const std::string getStart();
 	virtual const std::string getEnd();
+	virtual const int getStartMins();
+	virtual const int getStartHours();
+	virtual const int getEndMins();
+	virtual const int getEndHours();
 	TimeAllocation();
 	~TimeAllocation();
 };

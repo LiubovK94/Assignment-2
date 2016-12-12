@@ -17,6 +17,15 @@ const std::string Extra::getEnd(){ return end.getFormatted(); }
 const std::string Extra::getDesc(){ return description; }
 const std::vector<std::string> Extra::getProg() { return programmer; }
 
+const int Extra::getStartMins(){ return start.getMins(); }
+
+const int Extra::getStartHours(){ return start.getHours(); }
+
+
+const int Extra::getEndMins(){ return end.getMins(); }
+
+const int Extra::getEndHours(){ return end.getHours(); }
+
 const void Extra::showDetails()
 {
 
