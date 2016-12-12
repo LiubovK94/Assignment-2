@@ -12,13 +12,21 @@ class Task
 	DateTime start;
 	DateTime deadline;
 	std::vector<std::unique_ptr<TimeAllocation>> ta;
+	
 public:
-	Task(const char* name_, const char* description_, const char* start_, const char* deadline_);
+	Task(std::string &name_, std::string &description_, std::string &start_, std::string &deadline_);
 	void showTasks();
 	
 	void addTA(std::unique_ptr<TimeAllocation> ta_);
-	void showTimeAl();
+
+	const std::stringstream Task::showTimeAl();
 	Task();
 	~Task();
+	const std::string getStart();
+	const std::string getDeadline();
+	const std::string getName();
+	const std::string getDescription();
+	std::unique_ptr<TimeAllocation> getTA();
 };
 
+const std::ostream& operator << (std::ostream& os, Task& t);

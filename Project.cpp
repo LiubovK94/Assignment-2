@@ -1,7 +1,7 @@
 #include "Project.h"
 
 
-Project::Project(const char* name_, const char* description_, const char* start_, const char* deadline_)
+Project::Project(std::string &name_, std::string &description_, std::string &start_, std::string &deadline_)
 {
 	name = name_;
 	description = description_;
@@ -16,9 +16,9 @@ void Project::addTask(Task * t)
 
 void Project::show()
 {
-	for (int i = 0; i <= name.length() ; ++i)
+	for (int i = 0; i <= name.length(); ++i)
 	{
-		if (i <= name.length() -1){
+		if (i <= name.length() - 1){
 			std::cout << "=";
 		}
 		else {
@@ -26,7 +26,7 @@ void Project::show()
 		}
 	}
 
-	std::cout<< " " << name << std::endl;
+	std::cout << " " << name << std::endl;
 	for (int i = 0; i <= name.length(); ++i)
 	{
 		if (i <= name.length() - 1){
@@ -36,14 +36,14 @@ void Project::show()
 			std::cout << "-" << std::endl;
 		}
 	}
-	std::cout <<" - "<< description << std::endl;
-	std::cout <<" - Started: " << start.getFormatted() << std::endl;
-	std::cout <<" - Deadline: " << deadline.getFormatted() << std::endl;
+	std::cout << " - " << description << std::endl;
+	std::cout << " - Started: " << start.getFormatted() << std::endl;
+	std::cout << " - Deadline: " << deadline.getFormatted() << std::endl;
 
-	for (auto it = tasks.begin(); it != tasks.end(); ++it)
+	for (auto it : tasks)
 	{
-		(*it)->showTasks();
-		
+		std::cout << (*it);
+
 	}
 }
 
@@ -56,6 +56,12 @@ void Project::viewTasks()
 	}
 }
 
+const std::string Project::getStart(){ return start.getFormatted(); }
+const std::string Project::getDeadline(){ return deadline.getFormatted(); }
+const std::string Project::getName(){ return name; }
+const std::string Project::getDescription(){ return description; }
+const std::vector<Task *>& Project::getTasks(){ return tasks; }
+
 Project::Project()
 {
 }
@@ -63,4 +69,40 @@ Project::Project()
 
 Project::~Project()
 {
+}
+
+const std::ostream& operator << (std::ostream& os, Project& p)
+{
+	std::string name = p.getName();
+
+	for (int i = 0; i <= name.length(); ++i)
+	{
+		if (i <= name.length() - 1){
+			os << "=";
+		}
+		else {
+			os << "=" << std::endl;
+		}
+	}
+
+	os << " " << name << std::endl;
+	for (int i = 0; i <= name.length(); ++i)
+	{
+		if (i <= name.length() - 1){
+			os << "-";
+		}
+		else {
+			os << "-" << std::endl;
+		}
+	}
+	os << " - " << p.getDescription() << std::endl;
+	os << " - Started: " << p.getStart() << std::endl;
+	os << " - Deadline: " << p.getDeadline() << std::endl;
+	std::vector<Task *> tasks = p.getTasks();
+	for (auto it : tasks)
+	{
+		os << (*it);
+
+	}
+	return os;
 }

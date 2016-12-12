@@ -8,9 +8,14 @@ private:
 	std::string note;
 	std::string type = "Bug Fix";
 public:
-	void showDetails();
-	BugFix(char const * start_, char const * end_, char const * desc_, char const * id_);
+	const void showDetails();
+	const std::string getStart();
+	const std::string getEnd();
+	const std::string getNote();
+	const std::string getId();
+	BugFix(std::string &start_, std::string &end_, std::string &desc_, std::string &id_);
 	BugFix();
 	~BugFix();
 };
 
+const std::ostream& operator << (std::ostream& os, BugFix& b);

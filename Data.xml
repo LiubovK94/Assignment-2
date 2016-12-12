@@ -14,7 +14,7 @@
           <type>Work Done</type>
           <tstart>31/10/2016 19:15</tstart>
           <tend>31/10/2016 19:30</tend>
-          <tdescription>Added operator to DateTime class</tdescription>
+          <tdescription>Added operator &lt;&lt; to DateTime class</tdescription>
         </timealloc>
 
         <timealloc>
@@ -29,8 +29,8 @@
           <tstart>01/11/2016 07:45</tstart>
           <tend>01/11/2016 09:00</tend>
           <tdescription>Meeting in 9309</tdescription>
-          <attendee>Jamie Hufford</attendee>
-          <attendee>Pascale Vacher</attendee>
+         <attendee>Jamie Hufford</attendee>
+          <attendee>Pascale Vacher</attendee> 
         </timealloc> 
 
         <timealloc>
@@ -48,12 +48,6 @@
       <taskStart>03/11/2016 12:30</taskStart>
       <taskDeadline>06/11/2016 16:00</taskDeadline>
     </task>
-  </project>
-  <project>
-    <name>Project 2</name>
-    <description>22222 An application which helps manage projects and their sub-tasks.</description>
-    <start>00/00/0000 19:00</start>
-    <deadline>00/00/0000 16:00</deadline>
   </project>
 
 </list>

@@ -15,7 +15,12 @@ private:
 	std::vector<Task *> tasks;
 public:
 
-	Project(const char* name_, const char* description_, const char* start_, const char* deadline_);
+	Project(std::string &name_, std::string &description_, std::string &start_, std::string &deadline_);
+	const std::string getStart();
+	const std::string getDeadline();
+	const std::string getName();
+	const std::string getDescription();
+	const std::vector<Task *>& getTasks();
 	void addTask(Task * t);
 	void viewTasks();
 	void show();
@@ -24,3 +29,4 @@ public:
 };
 
 
+const std::ostream& operator << (std::ostream& os, Project& t);

@@ -11,10 +11,17 @@ private:
 	std::string type = "Meeting";
 
 public:
-	void showDetails();
-	void addAttendee(char const * a);
-	Meeting(char const * start_, char const * end_, char const * desc_);
+	const void showDetails();
+	void addAttendee(std::string &a);
+	const std::string getStart();
+	const std::string getEnd();
+	const std::string getLoc();
+	
+	const std::vector<std::string> getAtt();
+
+	Meeting(std::string &start_, std::string &end_, std::string &desc_);
 	Meeting();
 	~Meeting();
 };
 
+const std::ostream& operator << (std::ostream& os,Meeting& m);
