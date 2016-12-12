@@ -17,6 +17,8 @@
 #endif
 
 void createObjects(tinyxml2::XMLDocument &, std::vector <Project *> &);
+void menu(std::vector<Project *>&);
+void loadNewFile(std::vector<Project *>&);
 
 int main(/*int argc, char **argv*/)
 {
@@ -25,17 +27,16 @@ int main(/*int argc, char **argv*/)
 	XMLCheckResult(eResult);
 	/*tinyxml2::XMLError eResult = xmlDoc.LoadFile(argv[1]);
 	XMLCheckResult(eResult);*/
-    std::vector<Project *> projects;
-    createObjects(xmlDoc, projects);
-
-
+	std::vector<Project *> projects;
+	createObjects(xmlDoc, projects);
 
 	for (auto it : projects)
 	{
-		std::cout<<(*it);
+		std::cout << (*it);
 	}
 
 
+	menu(projects);
 
 
 	std::cin.get();
@@ -73,7 +74,7 @@ void createObjects(tinyxml2::XMLDocument &xmlDoc, std::vector <Project *> &proje
 
 		while (pElement != nullptr)
 		{
-			
+
 			pNameProj = pElement->FirstChildElement("name");
 			if (pNameProj == nullptr) { projName = "Name of this project was not specified"; }
 			else { projName = pNameProj->GetText(); }
@@ -83,11 +84,11 @@ void createObjects(tinyxml2::XMLDocument &xmlDoc, std::vector <Project *> &proje
 			{projDesc = pDescProj->GetText(); }
 
 			pStartProj = pElement->FirstChildElement("start");
-			if (pStartProj == nullptr)  {  projStart = "00/00/00 00:00"; }
+			if (pStartProj == nullptr)  { projStart = "00/00/00 00:00"; }
 			{ projStart = pStartProj->GetText(); }
 
 			pDeadlineProj = pElement->FirstChildElement("deadline");
-			if (pDeadlineProj == nullptr) {projDeadline = "00/00/00 00:00"; }
+			if (pDeadlineProj == nullptr) { projDeadline = "00/00/00 00:00"; }
 			{ projDeadline = pDeadlineProj->GetText(); }
 
 			Project * pr = new Project(projName, projDesc, projStart, projDeadline);
@@ -100,7 +101,7 @@ void createObjects(tinyxml2::XMLDocument &xmlDoc, std::vector <Project *> &proje
 				{ taskName = pTaskName->GetText(); }
 
 				pTaskDesc = pTask->FirstChildElement("taskDescription");
-				if (pTaskDesc == nullptr) {  taskDesc = "Desc of this task was not specified"; }
+				if (pTaskDesc == nullptr) { taskDesc = "Desc of this task was not specified"; }
 				{ taskDesc = pTaskDesc->GetText(); }
 
 				pTaskStart = pTask->FirstChildElement("taskStart");
@@ -108,7 +109,7 @@ void createObjects(tinyxml2::XMLDocument &xmlDoc, std::vector <Project *> &proje
 				{ taskStart = pTaskStart->GetText(); }
 
 				pTaskDeadline = pTask->FirstChildElement("taskDeadline");
-				if (pTaskDeadline == nullptr) {  taskEnd = "00/00/00 00:00"; }
+				if (pTaskDeadline == nullptr) { taskEnd = "00/00/00 00:00"; }
 				{ taskEnd = pTaskDeadline->GetText(); }
 
 				Task * tsk = new Task(taskName, taskDesc, taskStart, taskEnd);
@@ -122,22 +123,22 @@ void createObjects(tinyxml2::XMLDocument &xmlDoc, std::vector <Project *> &proje
 
 					if (pType != nullptr) {
 
-					    type = pType->GetText();
+						type = pType->GetText();
 
 						if (type == (std::string("Work Done")))
 						{
 
 							pTAStart = pTimeAlloc->FirstChildElement("tstart");
-							if (pTAStart == nullptr) {  taStart = "00/00/00 00:00"; }
+							if (pTAStart == nullptr) { taStart = "00/00/00 00:00"; }
 							else{ taStart = pTAStart->GetText(); }
 
 
 							pTAEnd = pTimeAlloc->FirstChildElement("tend");
-							if (pTAEnd == nullptr) {  taEnd = "00/00/00 00:00"; }
+							if (pTAEnd == nullptr) { taEnd = "00/00/00 00:00"; }
 							else{ taEnd = pTAEnd->GetText(); }
 
 							pTADescription = pTimeAlloc->FirstChildElement("tdescription");
-							if (pTADescription == nullptr) {  taDesc = "Description of this task was not specified"; }
+							if (pTADescription == nullptr) { taDesc = "Description of this task was not specified"; }
 							else{ taDesc = pTADescription->GetText(); }
 
 							tsk->addTA(std::move(std::unique_ptr<TimeAllocation>(new WorkDone(taStart, taEnd, taDesc))));
@@ -146,16 +147,16 @@ void createObjects(tinyxml2::XMLDocument &xmlDoc, std::vector <Project *> &proje
 						else if (type == (std::string("Bug Fix")))
 						{
 							pTAStart = pTimeAlloc->FirstChildElement("tstart");
-							if (pTAStart == nullptr) {  taStart = "00/00/00 00:00"; }
+							if (pTAStart == nullptr) { taStart = "00/00/00 00:00"; }
 							else{ taStart = pTAStart->GetText(); }
 
 
 							pTAEnd = pTimeAlloc->FirstChildElement("tend");
-							if (pTAEnd == nullptr) {taEnd = "00/00/00 00:00"; }
+							if (pTAEnd == nullptr) { taEnd = "00/00/00 00:00"; }
 							else{ taEnd = pTAEnd->GetText(); }
 
 							pTADescription = pTimeAlloc->FirstChildElement("tdescription");
-							if (pTADescription == nullptr) {  taDesc = "Description of this task was not specified"; }
+							if (pTADescription == nullptr) { taDesc = "Description of this task was not specified"; }
 							else{ taDesc = pTADescription->GetText(); }
 
 							pTAId = pTimeAlloc->FirstChildElement("id");
@@ -173,7 +174,7 @@ void createObjects(tinyxml2::XMLDocument &xmlDoc, std::vector <Project *> &proje
 
 
 							pTAEnd = pTimeAlloc->FirstChildElement("tend");
-							if (pTAEnd == nullptr) {  taEnd = "00/00/00 00:00"; }
+							if (pTAEnd == nullptr) { taEnd = "00/00/00 00:00"; }
 							else{ taEnd = pTAEnd->GetText(); }
 
 							pTADescription = pTimeAlloc->FirstChildElement("tdescription");
@@ -185,7 +186,7 @@ void createObjects(tinyxml2::XMLDocument &xmlDoc, std::vector <Project *> &proje
 							pTAAttendee = pTimeAlloc->FirstChildElement("attendee");
 							while (pTAAttendee != nullptr)
 							{
-							    taAt = pTAAttendee->GetText();
+								taAt = pTAAttendee->GetText();
 								m->addAttendee(taAt);
 								pTAAttendee = pTAAttendee->NextSiblingElement("attendee");
 							}
@@ -231,4 +232,49 @@ void createObjects(tinyxml2::XMLDocument &xmlDoc, std::vector <Project *> &proje
 
 		}
 	}
+}
+
+void menu(std::vector<Project *> &p)
+{
+	char opt; 
+
+	std::cout << std::endl;
+	std::cout << std::endl;
+	std::cout << "  Menu:" << std::endl;
+	std::cout << "  - Enter '1' if you want to load different file" << std::endl;
+	std::cin >> opt;
+
+	switch (opt)
+	{
+	case '1': loadNewFile(p); break;
+	default: {std::cout << "Please choose one of the existing options" << std::endl; menu(p); };
+	}
+
+}
+
+void loadNewFile(std::vector<Project *> &p)
+{
+	p.clear();
+
+	std::string s;
+	std::cout << "   Please enter filename: ";
+	std::cin >> s;
+	const char * str = s.c_str();
+
+	tinyxml2::XMLDocument xmlDoc_;
+	tinyxml2::XMLError eResult = xmlDoc_.LoadFile(str);
+	XMLCheckResult(eResult);
+
+	
+	createObjects(xmlDoc_, p);
+
+	for (auto it : p)
+	{
+		std::cout << (*it);
+	}
+
+
+	menu(p);
+
+
 }
