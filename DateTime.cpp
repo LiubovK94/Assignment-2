@@ -22,7 +22,31 @@ std::string DateTime::getFormatted() const
 }
 const int DateTime::getHours(){ return hour; }
 const int DateTime::getMins(){ return minute; }
+const int DateTime::getDay(){ return day; }
+const int DateTime::getMonth(){ return month; }
+const int DateTime::getYear(){ return year; }
 
+const long DateTime::getYMin()
+{
+	long min = 0;
+	switch (month)
+	{
+	case 1: min = ((year * 8760) * 60 + day * 24 * 60 + hour * 60 + min); break;
+	case 2: min = ((year * 8760) * 60 + 31 * 24 * 60 + day * 24 * 60 + hour * 60 + min); break;
+	case 3: min = ((year * 8760) * 60 + (31 + 28) * 24 * 60 + day * 24 * 60 + hour * 60 + min); break;
+	case 4: min = ((year * 8760) * 60 + (31 * 2 + 28) * 24 * 60 + day * 24 * 60 + hour * 60 + min); break;
+	case 5: min = ((year * 8760) * 60 + (31 * 2 + 28 + 30) * 24 * 60 + day * 24 * 60 + hour * 60 + min); break;
+	case 6: min = ((year * 8760) * 60 + (31 * 3 + 28 + 30) * 24 * 60 + day * 24 * 60 + hour * 60 + min); break;
+	case 7: min = ((year * 8760) * 60 + (31 * 3 + 28 + 30 * 2) * 24 * 60 + day * 24 * 60 + hour * 60 + min); break;
+	case 8: min = ((year * 8760) * 60 + (31 * 4 + 28 + 30 * 2) * 24 * 60 + day * 24 * 60 + hour * 60 + min); break;
+	case 9: min = ((year * 8760) * 60 + (31 * 4 + 28 + 30 * 3) * 24 * 60 + day * 24 * 60 + hour * 60 + min); break;
+	case 10: min = ((year * 8760) * 60 + (31 * 5 + 28 + 30 * 3) * 24 * 60 + day * 24 * 60 + hour * 60 + min); break;
+	case 11: min = ((year * 8760) * 60 + (31 * 5 + 28 + 30 * 4) * 24 * 60 + day * 24 * 60 + hour * 60 + min); break;
+	case 12: min = ((year * 8760) * 60 + (31 * 6 + 28 + 30 * 3) * 24 * 60 + day * 24 * 60 + hour * 60 + min); break;
+	default:break;
+	}
+	return min;
+}
 DateTime::DateTime()
 {
 }

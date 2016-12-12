@@ -11,6 +11,7 @@
 #include "TimeAllocation.h"
 #include "WorkDone.h"
 #include "tinyxml2.h"
+#include <cstdlib>
 
 #ifndef XMLCheckResult
 #define XMLCheckResult(a_eResult) if (a_eResult != tinyxml2::XML_SUCCESS) { std::cout<<"This file does not exist!"<<std::endl; std::cout<<"Press any key"<<std::endl; std::cin.get(); }
@@ -19,14 +20,16 @@
 void createObjects(tinyxml2::XMLDocument &, std::vector <Project *> &);
 void menu(std::vector<Project *>&);
 void loadNewFile(std::vector<Project *>&);
+void loadAsc(std::vector<Project *> &);
+void loadDesc(std::vector<Project *> &);
 
-int main(/*int argc, char **argv*/)
+int main(int argc, char **argv)
 {
 	tinyxml2::XMLDocument xmlDoc;
-	tinyxml2::XMLError eResult = xmlDoc.LoadFile("Data.xml");
+	//tinyxml2::XMLError eResult = xmlDoc.LoadFile("Data.xml");
+	//XMLCheckResult(eResult);
+	tinyxml2::XMLError eResult = xmlDoc.LoadFile(argv[1]);
 	XMLCheckResult(eResult);
-	/*tinyxml2::XMLError eResult = xmlDoc.LoadFile(argv[1]);
-	XMLCheckResult(eResult);*/
 	std::vector<Project *> projects;
 	createObjects(xmlDoc, projects);
 
@@ -242,11 +245,17 @@ void menu(std::vector<Project *> &p)
 	std::cout << std::endl;
 	std::cout << "  Menu:" << std::endl;
 	std::cout << "  - Enter '1' if you want to load different file" << std::endl;
+	std::cout << "  - Enter '2' if you want to view Time Allocations in ascending order" << std::endl;
+	std::cout << "  - Enter '3' if you want to view Time Allocations in descsending order" << std::endl;
+	std::cout << "  - Enter '4' if you want to exit" << std::endl;
 	std::cin >> opt;
 
 	switch (opt)
 	{
 	case '1': loadNewFile(p); break;
+	case '2': loadAsc(p); break;
+	case '3': loadDesc(p); break;
+	case '4': exit(0); break;
 	default: {std::cout << "Please choose one of the existing options" << std::endl; menu(p); };
 	}
 
@@ -277,4 +286,23 @@ void loadNewFile(std::vector<Project *> &p)
 	menu(p);
 
 
+}
+
+void loadAsc(std::vector<Project *> &p)
+{
+	for (auto it : p)
+	{
+		(*it).loadAsc();
+	}
+
+	menu(p);
+}
+void loadDesc(std::vector<Project *> &p)
+{
+	for (auto it : p)
+	{
+		(*it).loadDesc();
+	}
+
+	menu(p);
 }

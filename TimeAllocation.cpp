@@ -13,6 +13,7 @@ const int TimeAllocation::getStartMins(){ return start.getMins(); }
 const int TimeAllocation::getStartHours(){ return start.getHours(); }
 const int TimeAllocation::getEndMins(){ return end.getMins(); }
 const int TimeAllocation::getEndHours(){ return end.getHours(); }
+const long  TimeAllocation::getYMins(){ return start.getYMin(); }
 TimeAllocation::TimeAllocation()
 {
 }

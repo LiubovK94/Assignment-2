@@ -11,6 +11,10 @@ public:
 	std::string getFormatted() const; // return as a formatted string
 	const int getHours();
 	const int getMins();
+	const int getDay();
+	const int getMonth();
+	const int getYear();
+	const long getYMin();
 	DateTime();
 	~DateTime();
 private:

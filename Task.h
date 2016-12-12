@@ -18,7 +18,7 @@ public:
 	void showTasks();
 	
 	void addTA(std::unique_ptr<TimeAllocation> ta_);
-
+	
 	const std::stringstream Task::showTimeAl();
 	Task();
 	~Task();
@@ -29,7 +29,8 @@ public:
 	const std::string getDeadline();
 	const std::string getName();
 	const std::string getDescription();
-
+	const void loadAsc();
+	const void loadDesc();
 	std::unique_ptr<TimeAllocation> getTA();
 };
 

@@ -15,6 +15,8 @@ public:
 	virtual const int getStartHours();
 	virtual const int getEndMins();
 	virtual const int getEndHours();
+	virtual const long getYMins();
+	
 	TimeAllocation();
 	~TimeAllocation();
 };

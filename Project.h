@@ -21,6 +21,8 @@ public:
 	const std::string getName();
 	const std::string getDescription();
 	const std::vector<Task *>& getTasks();
+	const void loadAsc();
+	const void loadDesc();
 	void addTask(Task * t);
 	const void viewTasks();
 	const void show();

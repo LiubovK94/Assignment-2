@@ -49,6 +49,30 @@ const void Project::show()
 
 const void Project::viewTasks()
 {
+	for (int i = 0; i <= name.length(); ++i)
+	{
+		if (i <= name.length() - 1){
+			std::cout << "=";
+		}
+		else {
+			std::cout << "=" << std::endl;
+		}
+	}
+
+	std::cout << " " << name << std::endl;
+	for (int i = 0; i <= name.length(); ++i)
+	{
+		if (i <= name.length() - 1){
+			std::cout << "-";
+		}
+		else {
+			std::cout << "-" << std::endl;
+		}
+	}
+	std::cout << " - " << description << std::endl;
+	std::cout << " - Started: " << start.getFormatted() << std::endl;
+	std::cout << " - Deadline: " << deadline.getFormatted() << std::endl;
+
 	for (auto it = tasks.begin(); it != tasks.end(); ++it)
 	{
 		(*it)->showTasks();
@@ -80,6 +104,79 @@ const std::string Project::getDeadline(){ return deadline.getFormatted(); }
 const std::string Project::getName(){ return name; }
 const std::string Project::getDescription(){ return description; }
 const std::vector<Task *>& Project::getTasks(){ return tasks; }
+
+
+const void Project::loadAsc()
+{
+
+	for (int i = 0; i <= name.length(); ++i)
+	{
+		if (i <= name.length() - 1){
+			std::cout << "=";
+		}
+		else {
+			std::cout << "=" << std::endl;
+		}
+	}
+
+	std::cout << " " << name << std::endl;
+	for (int i = 0; i <= name.length(); ++i)
+	{
+		if (i <= name.length() - 1){
+			std::cout << "-";
+		}
+		else {
+			std::cout << "-" << std::endl;
+		}
+	}
+	std::cout << " - " << description << std::endl;
+	std::cout << " - Started: " << start.getFormatted() << std::endl;
+	std::cout << " - Deadline: " << deadline.getFormatted() << std::endl;
+
+
+
+	for (auto it : tasks)
+	{
+		(*it).loadAsc();
+	}
+
+}
+
+const void Project::loadDesc()
+{
+
+	for (int i = 0; i <= name.length(); ++i)
+	{
+		if (i <= name.length() - 1){
+			std::cout << "=";
+		}
+		else {
+			std::cout << "=" << std::endl;
+		}
+	}
+
+	std::cout << " " << name << std::endl;
+	for (int i = 0; i <= name.length(); ++i)
+	{
+		if (i <= name.length() - 1){
+			std::cout << "-";
+		}
+		else {
+			std::cout << "-" << std::endl;
+		}
+	}
+	std::cout << " - " << description << std::endl;
+	std::cout << " - Started: " << start.getFormatted() << std::endl;
+	std::cout << " - Deadline: " << deadline.getFormatted() << std::endl;
+
+
+
+	for (auto it : tasks)
+	{
+		(*it).loadDesc();
+	}
+
+}
 
 Project::Project()
 {

@@ -1,6 +1,7 @@
 #include "Task.h"
 #include "WorkDone.h"
 #include <iostream>
+#include <algorithm>
 
 Task::Task(std::string &name_, std::string &description_, std::string &start_, std::string &deadline_)
 {
@@ -49,7 +50,7 @@ const std::string Task::countTime()
 {
 	int hours = countH();
 	int min = countM();
-	std::string s = "Time Spent:  " + std::to_string(hours) + "h " + std::to_string(min) + "m " ;
+	std::string s = "Time Spent:  " + std::to_string(hours) + "h " + std::to_string(min) + "m ";
 	return s;
 
 }
@@ -68,7 +69,7 @@ const int Task::countH()
 	}
 
 	hours = min / 60;
-	
+
 	return hours;
 
 }
@@ -97,6 +98,93 @@ const std::string Task::getDeadline(){ return deadline.getFormatted(); }
 const std::string Task::getName(){ return name; }
 const std::string Task::getDescription(){ return description; }
 
+
+static bool cmp(std::unique_ptr<TimeAllocation> &a, std::unique_ptr<TimeAllocation> &b)
+{
+	return (a->getYMins() < b->getYMins());
+}  
+
+static bool cmp_d(std::unique_ptr<TimeAllocation> &a, std::unique_ptr<TimeAllocation> &b)
+{
+	return (a->getYMins() > b->getYMins());
+}
+
+const void Task::loadAsc()
+{
+	for (int i = 0; i <= name.length(); ++i)
+	{
+		if (i <= name.length() - 1){
+			std::cout << "-";
+		}
+		else {
+			std::cout << "-" << std::endl;
+		}
+	}
+	std::cout << " " << name << std::endl;
+	for (int i = 0; i <= name.length(); ++i)
+	{
+		if (i <= name.length() - 1){
+			std::cout << "-";
+		}
+		else {
+			std::cout << "-" << std::endl;
+		}
+	}
+	std::cout << "  - " << description << std::endl;
+	std::cout << "  - Started: " << start.getFormatted() << std::endl;
+	std::cout << "  - Deadline: " << deadline.getFormatted() << std::endl;
+
+	sort(ta.begin(), ta.end(), cmp);
+
+	if (ta.empty()){ std::cout << "  - No time allocations are recorded for this task" << std::endl; }
+	else{
+		std::cout << "  - Time Allocations:" << std::endl;
+
+		for (auto& it : ta)
+		{
+			std::cout << *it;
+		}
+	}
+
+} 
+const void Task::loadDesc()
+{
+	for (int i = 0; i <= name.length(); ++i)
+	{
+		if (i <= name.length() - 1){
+			std::cout << "-";
+		}
+		else {
+			std::cout << "-" << std::endl;
+		}
+	}
+	std::cout << " " << name << std::endl;
+	for (int i = 0; i <= name.length(); ++i)
+	{
+		if (i <= name.length() - 1){
+			std::cout << "-";
+		}
+		else {
+			std::cout << "-" << std::endl;
+		}
+	}
+	std::cout << "  - " << description << std::endl;
+	std::cout << "  - Started: " << start.getFormatted() << std::endl;
+	std::cout << "  - Deadline: " << deadline.getFormatted() << std::endl;
+
+	sort(ta.begin(), ta.end(), cmp_d);
+
+	if (ta.empty()){ std::cout << "  - No time allocations are recorded for this task" << std::endl; }
+	else{
+		std::cout << "  - Time Allocations:" << std::endl;
+
+		for (auto& it : ta)
+		{
+			std::cout << *it;
+		}
+	}
+
+}
 
 const std::stringstream Task::showTimeAl()
 {
