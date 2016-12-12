@@ -10,37 +10,45 @@
       <taskDescription>Write all classes</taskDescription>
       <taskStart>31/10/2016 19:15</taskStart>
       <taskDeadline>02/11/2016 16:00</taskDeadline>
-   <timealloc>
-          <type>Work Done</type>
-          <tstart>31/10/2016 19:15</tstart>
-          <tend>31/10/2016 19:30</tend>
-          <tdescription>Added operator &lt;&lt; to DateTime class</tdescription>
-        </timealloc>
+      <timealloc>
+        <type>Work Done</type>
+        <tstart>31/10/2016 19:15</tstart>
+        <tend>31/10/2016 19:30</tend>
+        <tdescription>Added operator &lt;&lt; to DateTime class</tdescription>
+      </timealloc>
 
-        <timealloc>
-          <type>Work Done</type>
-          <tstart>31/10/2016 20:00</tstart>
-          <tend>31/10/2016 20:30</tend>
-          <tdescription>Added cascading &lt;&lt; for all classes</tdescription>
-        </timealloc> 
+      <timealloc>
+        <type>Work Done</type>
+        <tstart>31/10/2016 20:00</tstart>
+        <tend>31/10/2016 20:30</tend>
+        <tdescription>Added cascading &lt;&lt; for all classes</tdescription>
+      </timealloc>
 
-        <timealloc>
-          <type>Meeting</type>
-          <tstart>01/11/2016 07:45</tstart>
-          <tend>01/11/2016 09:00</tend>
-          <tdescription>Meeting in 9309</tdescription>
-         <attendee>Jamie Hufford</attendee>
-          <attendee>Pascale Vacher</attendee> 
-        </timealloc> 
+      <timealloc>
+        <type>Meeting</type>
+        <tstart>01/11/2016 07:45</tstart>
+        <tend>01/11/2016 09:00</tend>
+        <tdescription>Meeting in 9309</tdescription>
+        <attendee>Jamie Hufford</attendee>
+        <attendee>Pascale Vacher</attendee>
+      </timealloc>
 
-        <timealloc>
-          <type>Bug Fix</type>
-          <tstart>02/11/2016 15:15</tstart>
-          <tend>02/11/2016 15:30</tend>
-          <id>152</id>
-          <tdescription>Fixed formatting issues</tdescription>
-        </timealloc> 
-        </task>
+      <timealloc>
+        <type>Bug Fix</type>
+        <tstart>02/11/2016 15:15</tstart>
+        <tend>02/11/2016 15:30</tend>
+        <id>152</id>
+        <tdescription>Fixed formatting issues</tdescription>
+      </timealloc>
+
+      <timealloc>
+        <type>Extra Feature</type>
+        <tstart>03/11/2016 19:15</tstart>
+        <tend>03/11/2016 19:30</tend>
+        <tdescription>Added user menu</tdescription>
+        <programmer>John Doe</programmer>
+      </timealloc>
+    </task>
 
     <task>
       <taskName>Test Classes</taskName>

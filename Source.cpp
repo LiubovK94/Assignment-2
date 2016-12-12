@@ -6,6 +6,7 @@
 #include "BugFix.h"
 #include "Meeting.h"
 #include "Project.h"
+#include "Extra.h"
 #include "Task.h"
 #include "TimeAllocation.h"
 #include "WorkDone.h"
@@ -187,6 +188,33 @@ void createObjects(tinyxml2::XMLDocument &xmlDoc, std::vector <Project *> &proje
 							    taAt = pTAAttendee->GetText();
 								m->addAttendee(taAt);
 								pTAAttendee = pTAAttendee->NextSiblingElement("attendee");
+							}
+
+							tsk->addTA(std::move(m));
+						}
+						else if (type == (std::string("Extra Feature")))
+						{
+							pTAStart = pTimeAlloc->FirstChildElement("tstart");
+							if (pTAStart == nullptr) { taStart = "00/00/00 00:00"; }
+							else{ taStart = pTAStart->GetText(); }
+
+
+							pTAEnd = pTimeAlloc->FirstChildElement("tend");
+							if (pTAEnd == nullptr) { taEnd = "00/00/00 00:00"; }
+							else{ taEnd = pTAEnd->GetText(); }
+
+							pTADescription = pTimeAlloc->FirstChildElement("tdescription");
+							if (pTADescription == nullptr) { taDesc = "Description of this task was not specified"; }
+							else{ taDesc = pTADescription->GetText(); }
+
+							std::unique_ptr<Extra> m(new Extra(taStart, taEnd, taDesc));
+
+							pTAAttendee = pTimeAlloc->FirstChildElement("programmer");
+							while (pTAAttendee != nullptr)
+							{
+								taAt = pTAAttendee->GetText();
+								m->addProgrammer(taAt);
+								pTAAttendee = pTAAttendee->NextSiblingElement("programmer");
 							}
 
 							tsk->addTA(std::move(m));
